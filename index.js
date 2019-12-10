@@ -1,10 +1,12 @@
 var express = require('express'),
     fs = require('fs')
     url = require('url');
+var cors = require('cors')
 var bodyParser = require('body-parser');
 var csvWriter = require('csv-write-stream')
 
 const app = express()
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
@@ -29,5 +31,5 @@ app.post('/saveUserInfo', function(req, res) {
 
 
 app.listen(8080, () => {
-    console.log(`Listening on port ${8080}`)
+    console.log(`CORS-enabled web server Listening on port 8080`)
 })
