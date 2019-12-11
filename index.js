@@ -13,16 +13,19 @@ app.use(bodyParser.urlencoded({
 }))
 
 var writer = csvWriter({ headers: ["userName", "userEmail", "phoneNum"]})
-writer.pipe(fs.createWriteStream('userInfo.csv'))
+writer.pipe(fs.createWriteStream('userInfo.csv', {flags: 'a'}))
 writer.write([])
 writer.end()
 
 app.post('/saveUserInfo', function(req, res) {
-    var userName = req.body.userName;
-    var userEmail = req.body.userEmail;
-    var phoneNum = req.body.phoneNum;
+    console.log('we got a request. The request is: ' + JSON.stringify(req.body))
+    const request = req.body;
+    var userName = request.userName;
+    var userEmail = request.userEmail;
+    var phoneNum = request.phoneNum;
     const writer = csvWriter({sendHeaders: false})
     writer.pipe(fs.createWriteStream('userInfo.csv', {flags: 'a'}))
+    console.log('Calling write function')
     writer.write({userName, userEmail, phoneNum})
     writer.end();
     res.send('Received successfully')
