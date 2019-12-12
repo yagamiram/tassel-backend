@@ -33,6 +33,6 @@ app.post('/saveUserInfo', function(req, res) {
 
 
 
-app.listen(8080, () => {
-    console.log(`CORS-enabled web server Listening on port 8080`)
+app.listen(process.env.PORT || 5000, () => {
+    console.log(`CORS-enabled web server Listening on port ${process.env.PORT}`)
 })
