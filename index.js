@@ -13,9 +13,11 @@ app.use(bodyParser.urlencoded({
 }))
 
 var writer = csvWriter({ headers: ["userName", "userEmail", "phoneNum"]})
-writer.pipe(fs.createWriteStream('userInfo.csv', {flags: 'a'}))
+writer.pipe(fs.createWriteStream(`${__dirname}/userInfo.csv`, {flags: 'a'}))
 writer.write([])
 writer.end()
+
+console.log('the dir name is: ' + __dirname)
 
 app.post('/saveUserInfo', function(req, res) {
     console.log('we got a request. The request is: ' + JSON.stringify(req.body))
@@ -24,7 +26,7 @@ app.post('/saveUserInfo', function(req, res) {
     var userEmail = request.userEmail;
     var phoneNum = request.phoneNum;
     const writer = csvWriter({sendHeaders: false})
-    writer.pipe(fs.createWriteStream('userInfo.csv', {flags: 'a'}))
+    writer.pipe(fs.createWriteStream(`${__dirname}/userInfo.csv`, {flags: 'a'}))
     console.log('Calling write function')
     writer.write({userName, userEmail, phoneNum})
     writer.end();
