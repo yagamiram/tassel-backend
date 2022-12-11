@@ -23,7 +23,7 @@
     "csv-write-stream": "^2.0.0",
     "csv-writer": "^1.5.0",
     "cvs-writer": "0.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fs": "0.0.1-security",
     "url": "^0.11.0"
   }
